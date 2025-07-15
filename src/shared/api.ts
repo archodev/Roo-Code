@@ -58,10 +58,12 @@ export const getModelMaxOutputTokens = ({
 	modelId,
 	model,
 	settings,
+	inputTokenCount,
 }: {
 	modelId: string
 	model: ModelInfo
 	settings?: ProviderSettings
+	inputTokenCount?: number
 }): number | undefined => {
 	// Check for Claude Code specific max output tokens setting
 	if (settings?.apiProvider === "claude-code") {
@@ -71,6 +73,19 @@ export const getModelMaxOutputTokens = ({
 
 	if (shouldUseReasoningBudget({ model, settings })) {
 		return settings?.modelMaxTokens || DEFAULT_HYBRID_REASONING_MODEL_MAX_TOKENS
+	}
+
+	// Check if auto-calculate is enabled for max output tokens
+	if (settings?.autoCalculateMaxOutputTokens && inputTokenCount !== undefined) {
+		// Calculate remaining context window space, capped at model's max output limit
+		const remainingTokens = model.contextWindow - inputTokenCount
+		const modelMaxOutput = model.maxTokens || Math.ceil(model.contextWindow * 0.5)
+		return Math.min(remainingTokens, modelMaxOutput)
+	}
+
+	// Check if manual max output tokens is set
+	if (settings?.modelMaxOutputTokens) {
+		return settings.modelMaxOutputTokens
 	}
 
 	const isAnthropicModel = modelId.includes("claude")

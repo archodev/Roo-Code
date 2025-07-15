@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { inputEventTransform, noTransform } from "../transforms"
 
 import { ModelPicker } from "../ModelPicker"
+import { MaxOutputTokens } from "../MaxOutputTokens"
 import { OpenRouterBalanceDisplay } from "./OpenRouterBalanceDisplay"
 
 type OpenRouterProps = {

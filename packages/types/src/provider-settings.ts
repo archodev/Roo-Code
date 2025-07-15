@@ -65,6 +65,10 @@ const baseProviderSettingsSchema = z.object({
 	reasoningEffort: reasoningEffortsSchema.optional(),
 	modelMaxTokens: z.number().optional(),
 	modelMaxThinkingTokens: z.number().optional(),
+
+	// Max output tokens control.
+	modelMaxOutputTokens: z.number().optional(),
+	autoCalculateMaxOutputTokens: z.boolean().optional(),
 })
 
 // Several of the providers share common model config properties.

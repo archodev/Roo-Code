@@ -698,5 +698,11 @@
 		"useCustomArn": "Use custom ARN..."
 	},
 	"includeMaxOutputTokens": "Include max output tokens",
-	"includeMaxOutputTokensDescription": "Send max output tokens parameter in API requests. Some providers may not support this."
+	"includeMaxOutputTokensDescription": "Send max output tokens parameter in API requests. Some providers may not support this.",
+	"maxOutputTokens": {
+		"autoCalculate": "Automatically calculate max output tokens",
+		"autoCalculateDescription": "Automatically set max output tokens based on remaining context window space to prevent overflow errors",
+		"maxTokens": "Max Output Tokens",
+		"rangeDescription": "Range: {{min}} - {{max}} tokens"
+	}
 }
